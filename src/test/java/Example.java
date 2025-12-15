@@ -20,6 +20,7 @@ public class Example {
 
             // burada siteyi actik
             page.navigate("https://www.saucedemo.com/");
+            System.out.println(page.title());
 
             // browser i kapattik
             browser.close();
