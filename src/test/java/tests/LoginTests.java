@@ -22,7 +22,7 @@ public class LoginTests extends BaseTest {
     public void failedLogin() {
         LoginPage loginPage = new LoginPage(page);
 
-        loginPage.fillUsername("error_user")
+        loginPage.fillUsername("locked_out_user")
                  .fillPassword("secret_sauce")
                  .clickLoginBtnFail();
 
