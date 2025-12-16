@@ -21,8 +21,8 @@ public class BasePage {
         page.locator(selector).click();
     }
 
-    public void getText(String selector) {
-        page.locator(selector).innerText();
+    public String getText(String selector) {
+        return page.locator(selector).innerText();
     }
 
     public boolean isVisible(String selector) {

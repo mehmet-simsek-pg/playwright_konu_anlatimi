@@ -2,7 +2,7 @@ package pages;
 
 import com.microsoft.playwright.Page;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
     // Selectors
     private final String usernameInput = "#user-name";
@@ -17,7 +17,8 @@ public class LoginPage extends BasePage{
      * Ama login butona bastigimda eger islem basarili olursa sayfa(Page) degisiyor.
      * POM yapisi geregi bunu belirtmem gerek, ki devam eden testlerde sayfa(page) ile
      * alakali sorun yasamayalim.
-     * */
+     *
+     */
     public LoginPage(Page page) {
         super(page);
     }
@@ -43,7 +44,6 @@ public class LoginPage extends BasePage{
     /**
      * Login işlemi başarılı olduğunda
      * kullanıcı ProductsPage'e yönlendirilir.
-     *
      * POM prensibi gereği, sayfa değiştiği için
      * yeni sayfayı temsil eden Page Object döndürülür.
      */
@@ -55,7 +55,6 @@ public class LoginPage extends BasePage{
     /**
      * Login işlemi başarısız olduğunda
      * aynı sayfada (LoginPage) kalınır.
-     *
      * Bu yüzden LoginPage döndürülür.
      */
     public LoginPage clickLoginBtnFail() {
@@ -63,10 +62,20 @@ public class LoginPage extends BasePage{
         return this;
     }
 
-    public void loginAs() {
+    public ProductsPage loginAs(String username, String password) {
 
+        fillUsername(username);
+        fillPassword(password);
+        clickLoginBtnSuccess();
+        return new ProductsPage(page); // Basarili bir sekilde login olduktan acilan sayfa
+        // ProductPage oldugu icin metodun dönüs degeri void olamaz
     }
 
+    public String getErrorMessage() {
+        return getText(errorMessage);
+    }
 
-
+    public boolean isErrorMessageVisible() {
+        return isVisible(errorMessage);
+    }
 }
