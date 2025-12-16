@@ -28,4 +28,24 @@ public class CartTests extends BaseTest {
 
         Assert.assertEquals(cartPage.getCartItemCount(), 0);
     }
+
+    @Test
+    public void clickContinueBtn() {
+
+        ProductsPage productsPage = new LoginPage(page)
+                .loginAs("standard_user", "secret_sauce");
+
+        Assert.assertTrue(productsPage.isOpenPage());
+
+        productsPage.addProductToCart(1);
+
+        CartPage cartPage = productsPage.clickCartIcon();
+
+        Assert.assertTrue(cartPage.isOpenPage());
+
+        ProductsPage backToProductPage = cartPage.clickContinue();
+
+        Assert.assertTrue(backToProductPage.isOpenPage());
+
+    }
 }

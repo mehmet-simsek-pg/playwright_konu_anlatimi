@@ -21,4 +21,15 @@ public class ProductTests extends BaseTest {
 
         Assert.assertEquals(productsPage.getCartBadgeCount(), 2);
     }
+
+    @Test
+    public void productCountShouldBe6(){
+
+        ProductsPage productsPage = new LoginPage(page)
+                .loginAs("standard_user", "secret_sauce");
+
+        Assert.assertTrue(productsPage.isOpenPage());
+
+        Assert.assertEquals(productsPage.getInventoryCount(), 6);
+    }
 }

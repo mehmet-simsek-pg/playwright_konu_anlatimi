@@ -2,14 +2,19 @@ package pages;
 
 import com.microsoft.playwright.Page;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductsPage extends BasePage{
 
     private final String pageTitle = "[data-test='title']";
-    private final String inventoryItem = "[data-test='inventory_item']";
+    private final String inventoryItem = "[data-test='inventory-item']";
     private final String addToCart = "(//button[text()='Add to cart'])[%d]"; // String.format() kullanicaz
     private final String cartItem = "[data-test='shopping-cart-link']";
     private final String cartBadge = "[data-test='shopping-cart-badge']";
     private final String productSortDropDown = "[data-test='product-sort-container']";
+    private final String inventoryItemNames = "[data-test='inventory-item-name']";
+    private final String inventoryItemPrices = "[data-test='inventory-item-price']";
 
     public ProductsPage(Page page) {
         super(page);
@@ -52,4 +57,19 @@ public class ProductsPage extends BasePage{
         return new CartPage(page);
     }
 
+    public List<String> getAllProductNames() {
+        return page.locator(inventoryItemNames).allInnerTexts();
+    }
+
+    public List<Double> getAllProductPrices() {
+
+        List<String> prices = page.locator(inventoryItemPrices).allInnerTexts();
+        List<Double> itemPrices = new ArrayList<>();
+
+        for(String price: prices) {
+            itemPrices.add(Double.parseDouble(price.replace("$", "").trim()));
+        }
+
+        return itemPrices;
+    }
 }
