@@ -22,7 +22,7 @@ public class Example {
             // burada siteyi actik
             page.navigate("https://www.saucedemo.com/");
             System.out.println(page.title());
-            page.pause(); // inspector u baslatmak icin kullandik
+            //page.pause(); // inspector u baslatmak icin kullandik
 
             // Placeholder ile kullanim sekli
             // input alani icerisinde kullanicinin gördügü kisim
@@ -35,6 +35,7 @@ public class Example {
             // Role ile kullanim
             Locator loginBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login"));
             loginBtn.click();
+            page.pause();
 
             // browser i kapattik
             browser.close();
